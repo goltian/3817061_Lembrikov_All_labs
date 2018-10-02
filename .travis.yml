@@ -1,0 +1,14 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+before_script:
+  - mkdir ../build
+  - cd ../build
+script:
+  - cmake ../3817061_Lembrikov_All_labs
+  - make -j
+  - cd ./bin/
+  - ./All_labs
+notifications:
+  email: false
