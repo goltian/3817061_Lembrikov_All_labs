@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include <iostream>
 #include <math.h>
 
@@ -96,17 +96,17 @@ TVector<T>& TVector<T>::DeleteVector()
 template <class T>
 TVector<T>& TVector<T>::Transform(int n)
 {
-	/*if (n > 0)
-	dlina = dlina + n;
-	if ((n < 0) && (dlina > n))
-	dlina = dlina - n;
-	if (dlina - n == 0)
-	{
-	dlina = 0;
-	vector = 0;
-	}
-	if (dlina - n < 0)
-	throw 1;*/
+//	if (n > 0)
+//	dlina = dlina + n;
+//	if ((n < 0) && (dlina > n))
+//	dlina = dlina - n;
+//	if (dlina - n == 0)
+//	{
+//	dlina = 0;
+//	vector = 0;
+//	}
+//	if (dlina - n < 0)
+//	throw 1;
 	if (n > 0)
 	{
 		T* buff = 0;
@@ -388,4 +388,4 @@ T TVector<T>::GelderNorm(int p)
 	}
 	else
 		return 0;
-}
+}*/
