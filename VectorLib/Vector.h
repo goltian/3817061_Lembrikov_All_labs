@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 #include <iostream>
 #include <math.h>
 
@@ -34,10 +34,10 @@ public:
 	T GelderNorm(int p);
 	T InfNorm();
 
-	template <class T>
-	friend std::istream& operator>>(std::istream& A, TVector<T>& B);
-	template <class T>
-	friend std::ostream& operator<<(std::ostream& A, TVector<T>& B);
+	template <class T1>
+	friend std::istream& operator>>(std::istream& A, TVector<T1>& B);
+	template <class T1>
+	friend std::ostream& operator<<(std::ostream& A, TVector<T1>& B);
 };
 // ---------------------------------------------------------------------------
 template <class T>
@@ -388,4 +388,4 @@ T TVector<T>::GelderNorm(int p)
 	}
 	else
 		return 0;
-}*/
+}
