@@ -1,22 +1,51 @@
-#include <iostream>
 #include "Vector.h"
 
 int main()
 {
-	float a[3] = { 1.1,2.4,3.4 };
-	float b[3] = { 0.55, 1.2, 1.7 };
-	int c[3] = { 1,2,3 };
-	int d[3] = { 3,2,1 };
+	cout << "Vectors:";
+	TVector <int> V1(3), V2(3), R(3);
+	for (int i = 0; i < 3; i++)
+	{
+		V1[i] = (i + 1 - (i + 3) * 3);
+		V2[i] = (i * 10 + 5 - i) * 2;
+	}
+	cout << "\n\nV1: " << V1 << endl;
+	cout << "V2: " << V2 << endl;
 
-	TVector<float> A(a, 3);
-	TVector<float> B(b, 3);
-	TVector<int> C(c, 3);
-	TVector<int> D(d, 3);
-	TVector<float> Sum;
-	TVector<float> Razn;
-	TVector<float> Umn;
-	TVector<float> Del;
-	std::cout << A << "\n" << B << "\n" << C << "\n" << D << "\n";
+	cout << "\n\nArithmetic operations:\n\n";
+	try
+	{
+		R = V1 + V2;
+		cout << "Result V1 + V2: " << R << endl;
+	}
+	catch (MyException exp)
+	{
+		exp.Print();
+	}
 
+	try
+	{
+		R = V1 - V2;
+		cout << "Result V1 - V2: " << R << endl;
+	}
+	catch (MyException exp)
+	{
+		exp.Print();
+	}
+
+	try
+	{
+		int k = V1 * V2;
+		cout << "Result V1 * V2: " << k << endl;
+	}
+	catch (MyException exp)
+	{
+		exp.Print();
+	}
+
+	cout << "\n\nUsing input / output streams:\n";
+	TVector <int> V(5);
+	cin >> V;
+	cout << "\nVector entered by you: " << V << endl;
 	return 0;
 }

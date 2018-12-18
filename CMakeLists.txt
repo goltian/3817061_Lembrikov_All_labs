@@ -3,6 +3,8 @@
 set(PROJECT_NAME AllLabs) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 
+set(ExceptionLib ExceptionLib)
+
 set(Vector Vector) #Переменная с именем библиотеки
 
 set(Vectortest Vectortest)
@@ -13,6 +15,9 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #С�
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
 endif()
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ExceptionLib)
+add_subdirectory(ExceptionLib)
 
 include_directories (${CMAKE_CURRENT_SOURCE_DIR}/VectorLib ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
