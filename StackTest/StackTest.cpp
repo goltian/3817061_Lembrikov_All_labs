@@ -1,182 +1,130 @@
-#include "Matrix.h"
-
+#include "Stack.h"
 #include <gtest.h>
 
-TEST(Matrix, can_create_matrix_with_not_specified_size)
+TEST(Stack, throws_when_create_stack_with_negative_size)
 {
-  ASSERT_NO_THROW(TMatrix <int> M());
+	ASSERT_ANY_THROW(TStack <int> S(-1));
 }
 
-TEST(Matrix, can_create_matrix_with_specified_size)
+TEST(Stack, can_put_and_get)
 {
-  ASSERT_NO_THROW(TMatrix <int> M(3));
+	TStack <int> S(1);
+	S.Put(3);
+	ASSERT_EQ(3, S.Get());
 }
 
-TEST(Matrix, throws_when_create_matrix_with_zero_size)
+TEST(Stack, can_use_full_check_false)
 {
-  ASSERT_ANY_THROW(TMatrix <int> M(0));
+	TStack <int> S(1);
+	ASSERT_FALSE(S.IsFull());
 }
 
-TEST(Matrix, throws_when_create_matrix_with_negative_size)
+TEST(Stack, can_use_full_check_true)
 {
-  ASSERT_ANY_THROW(TMatrix <int> M(-1));
+	TStack <int> S(1);
+	S.Put(5);
+	ASSERT_TRUE(S.IsFull());
 }
 
-TEST(Matrix, throws_when_create_matrix_with_too_large_size)
+TEST(Stack, can_use_empty_check_false)
 {
-  ASSERT_ANY_THROW(TMatrix <int> M(10001));
+	TStack <int> S(1);
+	S.Put(5);
+	ASSERT_FALSE(S.IsEmpty());
 }
 
-TEST(Matrix, can_equality_matrix_true)
+TEST(Stack, can_use_empty_check_true)
 {
-  TMatrix <int> M1(3), M2(3);
-  for (int i = 0; i < M1.GetSize(); i++)
-    for (int j = 0; j < M1.GetSize() - i; j++)
-    {
-      M1[i][j] = i;
-      M2[i][j] = i;
-    }
-  ASSERT_TRUE(M1 == M2);
+	TStack <int> S(1);
+	ASSERT_TRUE(S.IsEmpty());
 }
 
-TEST(Matrix, can_equality_matrix_false)
+TEST(Stack, throws_when_in_full_stack_put_elem)
 {
-  TMatrix <int> M1(3), M2(3);
-  for (int i = 0; i < M1.GetSize(); i++)
-    for (int j = 0; j < M1.GetSize() - i; j++)
-    {
-      M1[i][j] = i;
-      M2[i][j] = i + 1;
-    }
-  ASSERT_FALSE(M1 == M2);
+	TStack <int> S(1);
+	S.Put(2);
+	ASSERT_ANY_THROW(S.Put(5));
 }
 
-TEST(Matrix, can_equality_matrix_with_diff_size)
+TEST(Stack, throws_when_from_empty_stack_get_elem)
 {
-  TMatrix <int> M1(2), M2(3);
-  ASSERT_FALSE(M1 == M2);
+	TStack <int> S(1);
+	ASSERT_ANY_THROW(S.Get());
 }
 
-TEST(Matrix, can_inequality_matrix_true)
+TEST(Stack, Srav_true)
 {
-  TMatrix <int> M1(3), M2(3);
-  for (int i = 0; i < M1.GetSize(); i++)
-    for (int j = 0; j < M1.GetSize() - i; j++)
-    {
-      M1[i][j] = i;
-      M2[i][j] = i + 1;
-    }
-  ASSERT_TRUE(M1 != M2);
+	TStack <int> S(1), S2(1);
+	S.Put(1);
+	S2.Put(1);
+	ASSERT_TRUE(S == S2);
 }
 
-TEST(Matrix, can_inequality_matrix_false)
+TEST(Stack, Srav_false)
 {
-  TMatrix <int> M1(3), M2(3);
-  for (int i = 0; i < M1.GetSize(); i++)
-    for (int j = 0; j < M1.GetSize() - i; j++)
-    {
-      M1[i][j] = i;
-      M2[i][j] = i;
-    }
-  ASSERT_FALSE(M1 != M2);
+	TStack <int> S(1), S2(1);
+	S.Put(1);
+	S2.Put(2);
+	ASSERT_FALSE(S == S2);
 }
 
-TEST(Matrix, can_inequality_matrix_with_diff_size)
+TEST(Stack, Srav_false_when_dif_size)
 {
-  TMatrix <int> M1(2), M2(3);
-  ASSERT_TRUE(M1 != M2);
+	TStack <int> S(1), S2(3);
+	ASSERT_FALSE(S == S2);
 }
 
-TEST(Matrix, can_assign_matrix)
+TEST(Stack, Srav_false_when_dif_top)
 {
-  TMatrix <int> M1(3), M2(5);
-  M1 = M2;
-  ASSERT_TRUE(M1 == M2);
+	TStack <int> S(3), S2(3);
+	S.Put(1);
+	S2.Put(1), S2.Put(2);
+	ASSERT_FALSE(S == S2);
 }
 
-TEST(Matrix, can_addition_matrix)
+TEST(Stack, NoSrav_false)
 {
-  TMatrix <int> M1(2), M2(2), MT(2);
-  for (int i = 0; i < 2; i++)
-    for (int j = 0; j < 2 - i; j++) {
-      M1[i][j] = i + j;
-      M2[i][j] = i + j + 2;
-      MT[i][j] = M1[i][j] + M2[i][j];
-    }
-  ASSERT_TRUE(MT == (M1 + M2));
+	TStack <int> S(1), S2(1);
+	S.Put(1);
+	S2.Put(1);
+	ASSERT_FALSE(S != S2);
 }
 
-TEST(Matrix, thorws_when_addition_matrix_with_diff_size)
+TEST(Stack, NoSrav_true)
 {
-  TMatrix <int> M1(2), M2(3);
-  ASSERT_ANY_THROW(M1 + M2);
+	TStack <int> S(1), S2(1);
+	S.Put(1);
+	S2.Put(2);
+	ASSERT_TRUE(S != S2);
 }
 
-TEST(Matrix, can_subtraction_matrix)
+TEST(Stack, NoSrav_true_when_dif_size)
 {
-  TMatrix <int> M1(2), M2(2), MT(2);
-  for (int i = 0; i < 2; i++)
-    for (int j = 0; j < 2 - i; j++)
-    {
-      M1[i][j] = i + j;
-      M2[i][j] = i + j + 2;
-      MT[i][j] = M1[i][j] - M2[i][j];
-    }
-  ASSERT_TRUE(MT == (M1 - M2));
+	TStack <int> S(1), S2(3);
+	ASSERT_TRUE(S != S2);
 }
 
-TEST(Matrix, thorws_when_subtraction_matrix_with_diff_size)
+TEST(Stack, NoSrav_false_when_dif_top)
 {
-  TMatrix <int> M1(2), M2(3);
-  ASSERT_ANY_THROW(M1 - M2);
+	TStack <int> S(3), S2(3);
+	S.Put(1);
+	S2.Put(1), S2.Put(2);
+	ASSERT_TRUE(S != S2);
 }
 
-TEST(Matrix, can_multiplication_matrix)
+TEST(Stack, Prisvaiv)
 {
-  TMatrix <int> M1(3), M2(3), MT(3);
-  M1[0][0] = 1; M1[0][1] = 2; M1[0][2] = 3;
-  M1[1][0] = 4; M1[1][1] = 5;
-  M1[2][0] = 6;
-
-  M2[0][0] = 3; M2[0][1] = 5; M2[0][2] = 7;
-  M2[1][0] = 9; M2[1][1] = 11;
-  M2[2][0] = 13;
-
-  MT[0][0] = 3; MT[0][1] = 23; MT[0][2] = 68;
-  MT[1][0] = 36; MT[1][1] = 109;
-  MT[2][0] = 78;
-  ASSERT_TRUE(MT == (M1 * M2));
+	TStack <int> S(3), S2(1);
+	S.Put(1), S.Put(2), S.Put(3);
+	S2 = S;
+	ASSERT_TRUE(S2 == S);
 }
 
-TEST(Matrix, can_delit_matrix)
+TEST(Stack, Poryadok_vivoda)
 {
-  TMatrix<int> M1(3), M2(3), MT(3);
-  int k = 1;
-  for (int i = 0; i < 3; i++)
-    for (int j = 0; j < 3 - i; j++)
-      M1[i][j] = k++;
-
-  M2[0][0] = 1;
-  M2[0][1] = 2;
-  M2[0][2] = 3;
-  M2[1][0] = 1;
-  M2[1][1] = 2;
-  M2[2][0] = 1;
-
-  MT[0][0] = 1; MT[0][1] = 0; MT[0][2] = 0;
-  MT[1][0] = 4; MT[1][1] = -3;
-  MT[2][0] = 6;
-  ASSERT_TRUE(MT == (M1 / M2));
-}
-
-TEST(Matrix, thorws_when_delit_matrix_with_diff_size)
-{
-  TMatrix <int> M1(2), M2(3);
-  ASSERT_ANY_THROW(M1 / M2);
-}
-
-TEST(Matrix, thorws_when_multiplication_matrix_with_diff_size)
-{
-  TMatrix <int> M1(2), M2(3);
-  ASSERT_ANY_THROW(M1 * M2);
+	TStack <int> S(3);
+	S.Put(1), S.Put(2), S.Put(3);
+	ASSERT_EQ(S.Get(), 3);
+	ASSERT_EQ(S.Get(), 2);
+	ASSERT_EQ(S.Get(), 1);
 }

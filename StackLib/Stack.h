@@ -1,146 +1,156 @@
 #pragma once
-#include "Vector.h"
+#include <iostream>
+#include <locale.h>
+#include "../ExceptionLib/ExceptionLib.h"
+using namespace std;
 
 template <class T>
-class TMatrix : public TVector<TVector<T> >
+class TStack
 {
+protected:
+	int size; 
+	int top; 
+	T* mas;   
 public:
-  TMatrix(int s = 10);
-  TMatrix(const TMatrix &mt);
-  TMatrix(const TVector<TVector<T> > &mt);
-  virtual ~TMatrix();
+	TStack(int n = 0);            
+	TStack(TStack<T> &S);          
+	virtual ~TStack();            
+	int GetSize();                
+	T Get();                      
+	void Put(T A);                
+	bool IsFull();                
+	bool IsEmpty();                
+	void PrintStack();            
 
-  bool operator==(const TMatrix &mt) const;      // сравнение
-  bool operator!=(const TMatrix &mt) const;      // сравнение
-  TMatrix& operator=(const TMatrix &mt);        // присваивание
-  TMatrix operator+(const TMatrix &mt);         // сложение
-  TMatrix operator-(const TMatrix &mt);         // вычитание
-  TMatrix<T> operator*(const TMatrix<T> &MT);    // умножение
-  TMatrix<T> operator/(const TMatrix<T> &MT);    //деление
-
-  template <class ValType2>
-  friend istream& operator>>(istream &in, TMatrix<ValType2> &mt);
-  template <class ValType2>
-  friend ostream & operator<<(ostream &out, const TMatrix<ValType2> &mt);
+	int operator!=(const TStack<T>& stack) const; 
+	int operator==(const TStack<T>& stack) const; 
+	TStack& operator=(const TStack<T>& stack);
 };
 
 template <class T>
-TMatrix<T>::TMatrix(int s) :TVector<TVector<T> >(s)
+TStack<T>::TStack(int n)
 {
-  if (s <= 0 || s > 1000)
-    throw MyException("error size");
-  for (int i = 0; i < s; i++)
-    this->vec[i] = TVector<T>(s - i);
-} //-------------------------------------------------------------------------
-
-template <class T>
-TMatrix<T>::TMatrix(const TMatrix<T> &mt) :TVector<TVector<T> >(mt)
-{}//-------------------------------------------------------------------------
-
-template <class T>
-TMatrix<T>::TMatrix(const TVector<TVector<T> > &mt) : TVector<TVector<T> >(mt)
-{}//-------------------------------------------------------------------------
-
-template <class T>
-TMatrix<T>::~TMatrix()
-{}//-------------------------------------------------------------------------
-
-template <class T >
-bool TMatrix<T>::operator==(const TMatrix<T> &mt) const
-{
-  return TVector<TVector<T> >::operator==(mt);
-} //-------------------------------------------------------------------------
-
-template <class T>
-bool TMatrix<T>::operator!=(const TMatrix<T> &mt) const
-{
-  return TVector<TVector<T> >::operator!=(mt);
-} //-------------------------------------------------------------------------
-
-template <class T>
-TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T> &mt)
-{
-  TVector<TVector<T> >::operator=(mt);
-  return *this;
-} //-------------------------------------------------------------------------
-
-template <class T>
-TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &mt)
-{
-  if (this->size == mt.size)
-    return TVector<TVector<T> >::operator+(mt);
-  else
-    throw MyException("error size operand");
-} //-------------------------------------------------------------------------
-
-template <class T>
-TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &mt)
-{
-  if (this->size == mt.size)
-    return TVector<TVector<T> >::operator-(mt);
-  else
-    throw MyException("error size operand");
-} //-------------------------------------------------------------------------
-
-template <class T>
-TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &mt)
-{
-  if (this->size != mt.size)
-    throw MyException("error size operand");
-  TMatrix <T> rez(this->size);
-  for (int i = 0; i < this->size; i++)
-    for (int j = i; j < this->size; j++)
-    {
-      for (int k = i; k <= j; k++)
-        rez.vec[i][j - i] += this->vec[i][k - i] * mt.vec[k][j - k];
-    }
-  return rez;
+	if (n < 0)
+		throw MyException("error size stack");
+	if (n == 0)
+	{
+		size = 0;
+		top = 0;
+		mas = NULL;
+	}
+	else
+	{
+		size = n;
+		top = 0;
+		mas = new T[size];
+		for (int i = 0; i < size; i++)
+			mas[i] = 0;
+	}
 }//-------------------------------------------------------------------------
 
 template <class T>
-TMatrix<T> TMatrix<T>::operator/(const TMatrix<T> &mt)
+TStack<T>::TStack(TStack<T>& s)
 {
-  if (this->size != mt.size)
-    throw MyException("error size operand");
-  TMatrix <T> copy(*this);
-  TMatrix <T> rez(this->size);
-  TMatrix <T> copyMt(mt);
-
-  for (int i = 0; i < this->size; i++)
-    rez[i][0] = 1 / copyMt[i][0];
-
-  for (int i = 0; i < this->size - 1; i++)
-    for (int j = 1; j < this->size - i; j++)
-    {
-      if (copyMt[i][j] != 0)
-      {
-        T temp = copyMt[i][j];
-        rez[i][j] = (-1) * copyMt[i][j] * rez[i + j][0];
-        for (int k = j, l = 0; k < this->size - i; k++)
-          copyMt[i][k] = copyMt[i][k] - copyMt[j][l++] * temp;
-      }
-    }
-  rez = copy * rez;
-  return rez;
+	size = s.size;
+	top = s.top;
+	if (size == 0)
+		mas = NULL;
+	else
+	{
+		mas = new T[size];
+		for (int i = 0; i < size; i++)
+			mas[i] = s.mas[i];
+	}
 }//-------------------------------------------------------------------------
 
-
-template <class ValType2>
-istream& operator>>(istream &in, TMatrix<ValType2> &mt)
+template<class T>
+TStack <T>::~TStack()
 {
-  for (int i = 0; i < mt.size; i++)
-    in >> mt.vec[i];
-  return in;
+	top = size = 0;
+	delete[] mas;
 }//-------------------------------------------------------------------------
 
-template <class ValType2>
-ostream & operator<<(ostream &out, const TMatrix<ValType2> &mt)
+template <class T>
+int TStack<T>::GetSize()
 {
-  for (int i = 0; i < mt.size; i++)
-  {
-    for (int k = 0; k < i; k++)
-      out << "  ";
-    out << mt.vec[i] << endl;
-  }
-  return out;
+	return size;
+}//-------------------------------------------------------------------------
+
+template <class T>
+T TStack<T>::Get()
+{
+	if (IsEmpty())
+		throw MyException("error Get(). Stack is empty!");
+	top--;
+	return mas[top];
+}//-------------------------------------------------------------------------
+
+template <class T>
+void TStack<T>::Put(T a)
+{
+	if (IsFull())
+		throw MyException("error Put(). Stack in full!");
+	else
+	{
+		mas[top] = a;
+		top++;
+	}
+}//-------------------------------------------------------------------------
+
+template <class T>
+bool TStack<T>::IsFull()
+{
+	if (top >= size)
+		return 1;
+	return 0;
+}//-------------------------------------------------------------------------
+
+template <class T>
+bool TStack<T>::IsEmpty()
+{
+	if (top == 0)
+		return 1;
+	return 0;
+}//-------------------------------------------------------------------------
+
+template <class T>
+void TStack<T>::PrintStack()
+{
+
+	for (int i = top - 1; i >= 0; i--)
+		cout << " " << mas[i];
+}
+
+template <class T>
+TStack<T>& TStack<T>::operator=(const TStack<T>& s)
+{
+	if (this != &s)
+	{
+		delete[] mas;
+		top = s.top;
+		size = s.size;
+		mas = new T[size];
+		for (int i = 0; i < size; i++)
+			mas[i] = s.mas[i];
+	}
+	return *this;
+}//----------------------------------------------------------------------
+
+template <class T>
+int TStack<T>::operator==(const TStack<T>& s) const
+{
+	if (top != s.top)
+		return 0;
+	if (size != s.size)
+		return 0;
+	for (int i = 0; i < top; i++)
+		if (mas[i] != s.mas[i])
+			return 0;
+	return 1;
+}//----------------------------------------------------------------------
+
+template <class T>
+int TStack<T>::operator!=(const TStack<T>& s) const
+{
+	return !(*this == s);
 }

@@ -1,63 +1,40 @@
-#include "Matrix.h"
+#include "Stack.h"
+#include <cstdlib> 
 
 int main()
 {
-  cout << "Creating matrix\n\n";
-  TMatrix<int> M1(3), M2(3), R(3), MCin(3);
-  int k = 1;
-  for (int i = 0; i < 3; i++)
-    for (int j = 0; j < 3 - i; j++)
-      M1[i][j] = k++;
+	setlocale(LC_ALL, "Russian");
+	cout << "Пример использования стэка" << endl << "\nВведите размер стэка: ";
+	int n;
+	cin >> n;
+	try
+	{
+		TStack<int> stack(n);
+		for (int i = 0; i < n; i++)
+			stack.Put(i);
 
-  M2[0][0] = 1;
-  M2[0][1] = 2;
-  M2[0][2] = 3;
-  M2[1][0] = 1;
-  M2[1][1] = 2;
-  M2[2][0] = 1;
+		cout << "\стэк: \n";
+		stack.PrintStack();
 
-  cout << "M1:" << endl << M1 << endl;
-  cout << "\nM2:" << endl << M2 << endl;
+		TStack<int> copyStack(stack);
+		cout << "\n\nКопирование стэка :\n";
+		copyStack.PrintStack();
 
-  cout << "Examples of arithmetic operations: \n\n";
-  try {
-    R = M1 + M2;
-    cout << "Result M1 + M2:" << endl << R << endl;
-  }
-  catch (MyException exp)
-  {
-    exp.Print();
-  }
+		if (copyStack == stack)
+			cout << "\n\nИсходный и скопированный стэки равны";
 
-  try {
-    R = M1 - M2;
-    cout << "Result M1 - M2:" << endl << R << endl;
-  }
-  catch (MyException exp)
-  {
-    exp.Print();
-  }
+		cout << "\n\nВынуть элемент из стэка: " << stack.Get();
 
-  try {
-    R = M1 * M2;
-    cout << "Result M1 * M2:" << endl << R << endl;
-  }
-  catch (MyException exp)
-  {
-    exp.Print();
-  }
-  
-   try {
-    R = M1 / M2;
-    cout << "Result M1 * M2:" << endl << R << endl;
-  }
-  catch (MyException exp)
-  {
-    exp.Print();
-  }
+		cout << "\n\nПолучившийся стэк:\n";
+		stack.PrintStack();
 
-  cout << "\n\nUsing input / output streams:\n";
-  cin >> MCin;
-  cout << "\nMatrix:" << endl << MCin;
-  return 0;
+		if (copyStack != stack)
+			cout << "\n\nПолучившийся и исходный стэки разные\n";
+	}
+
+	catch (MyException exp)
+	{
+		exp.Print();
+	}
+	return 0;
 }
