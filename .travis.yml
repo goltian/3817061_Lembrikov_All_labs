@@ -10,5 +10,6 @@ script:
   - make -j
   - ./VectorTest/VectorTest
   - ./MatrixTest/MatrixTest
+  - ./StackTest/StackTest
 notifications:
   email: false
