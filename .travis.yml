@@ -9,6 +9,5 @@ script:
   - cmake ../3817061_Lembrikov_All_labs
   - make -j
   - cd ./Vector
-  - cd ./Matrix
 notifications:
   email: false
