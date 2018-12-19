@@ -27,7 +27,7 @@ public:
 template <class T>
 TMatrix<T>::TMatrix(int s) :TVector<TVector<T> >(s)
 {
-  if (s <= 0 || s >= 100000)
+  if (s <= 0 || s >= 1000)
     throw MyException("error size");
   for (int i = 0; i < s; i++)
     this->vec[i] = TVector<T>(s - i);
