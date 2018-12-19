@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector.h"
+#include <iomanip>
 template <class T>
 class TMatrix : public TVector<TVector<T> >
 {
@@ -26,7 +27,7 @@ public:
 template <class T>
 TMatrix<T>::TMatrix(int s) :TVector<TVector<T> >(s)
 {
-  if (s <= 0 || s >= 10000)
+  if (s <= 0 || s >= 100000)
     throw MyException("error size");
   for (int i = 0; i < s; i++)
     this->vec[i] = TVector<T>(s - i);
@@ -138,8 +139,8 @@ ostream & operator<<(ostream &out, const TMatrix<ValType2> &mt)
   for (int i = 0; i < mt.size; i++)
   {
     for (int k = 0; k < i; k++)
-			out << " \t " ;
-		out  << mt.vec[i] << endl;
+			out << "\t" ;
+		out << setprecision(5) << mt.vec[i] << endl;
   }
   return out;
 }

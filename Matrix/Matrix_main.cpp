@@ -10,7 +10,7 @@ int main()
 	double ra, nd, om;
 
 	cout << "Матрицы: \n";
-	TMatrix<int> M1(5), M2(5), Res(5);
+	TMatrix<double> M1(5), M2(5), Res(5);
 	for (int i = 0; i < 5; i++)
 		for (int j = 0; j < 5 - i; j++)
 		{
@@ -72,13 +72,13 @@ int main()
 	cout << "\nВведенная вами матрица:" << endl << MT;
 
 	//тестирование скорости 
-	TMatrix <int> MTest1(7000);
-	TMatrix <int> MTest2(7000);
-	TMatrix <int> MTest3(7000);
+	TMatrix <int> MTest1(10000);
+	TMatrix <int> MTest2(10000);
+	TMatrix <int> MTest3(10000);
 
-	for (int i = 0; i < 7000; i++)
+	for (int i = 0; i < 10000; i++)
 	{
-	for (int j = 0; j < 7000 - i; j++)
+		for (int j = 0; j < 10000 - i; j++)
 	{
 	MTest1[i][j] = (int)rand();
 	MTest2[i][j] = (int)rand();
@@ -88,7 +88,7 @@ int main()
 	MTest3 = MTest1 + MTest2;
 	int end = clock();
 
-	cout << "Время: " << (end - start) << endl;
+	cout << "Время: " << (end - start) << " милисекунд" << endl;
 
 	return 0;
 }

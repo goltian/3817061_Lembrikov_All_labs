@@ -199,6 +199,6 @@ template <class T>
 ostream& operator<<(ostream &out, const TVector<T> &v)
 {
 	for (int i = 0; i < v.size; i++)
-		out << v.vec[i] << " \t "  ;
+		out << v.vec[i] << "\t"  ;
 	return out;
 }
