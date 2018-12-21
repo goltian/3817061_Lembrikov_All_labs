@@ -139,8 +139,8 @@ ostream & operator<<(ostream &out, const TMatrix<ValType2> &mt)
   for (int i = 0; i < mt.size; i++)
   {
     for (int k = 0; k < i; k++)
-			out << "\t" ;
-		out << setprecision(5) << mt.vec[i] << endl;
+      out << "\t" ;
+    out << setprecision(5) << mt.vec[i] << endl;
   }
   return out;
 }
