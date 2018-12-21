@@ -71,7 +71,7 @@ int main()
 	cin >> MT;
 	cout << "\nВведенная вами матрица:" << endl << MT;
 
-	//тестирование скорости 
+	/*//тестирование скорости 
 	TMatrix <int> MTest1(10000);
 	TMatrix <int> MTest2(10000);
 	TMatrix <int> MTest3(10000);
@@ -88,7 +88,7 @@ int main()
 	MTest3 = MTest1 + MTest2;
 	int end = clock();
 
-	cout << "Время: " << (end - start) << " милисекунд" << endl;
+	cout << "Время: " << (end - start) << " милисекунд" << endl;*/
 
 	return 0;
 }
