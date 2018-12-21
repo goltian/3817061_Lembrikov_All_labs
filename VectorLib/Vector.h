@@ -1,5 +1,5 @@
 #pragma once
-#include "ExceptionLib.h"
+#include "../ExceptionLib/ExceptionLib.h"
 
 template <class T>
 class TVector
