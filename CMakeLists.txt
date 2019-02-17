@@ -9,6 +9,10 @@ set(Vector Vector)
 set(VectorLib VectorLib)
 set(VectorTest VectorTest)
 
+set(Matix Matix)
+set(MatixLib MatixLib)
+set(MatixTest MatixTest)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
@@ -27,6 +31,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib)
 add_subdirectory(Vector)
 add_subdirectory(VectorLib)
 add_subdirectory(VectorTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MatixLib)
+add_subdirectory(Matix)
+add_subdirectory(MatixLib)
+add_subdirectory(MatixTest)
 
 #add_executable(${PROJECT_NAME} ${srcs} ${hdrs}) #Создаем проект с именем из переменной ${PROJECT_NAME}, в него добавляются файлы из переменных ${srcs} и ${hdrs}
 #add_subdirectory(Lift_lib) #Собираем проект в поддиректории lib1

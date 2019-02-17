@@ -9,5 +9,6 @@ script:
   - cmake ../3817061_Lembrikov_All_labs
   - make -j
   - ./VectorTest/VectorTest
+  - ./MatrixTest/MatrixTest
 notifications:
   email: false
