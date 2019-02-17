@@ -11,5 +11,6 @@ script:
   - ./VectorTest/VectorTest
   - ./MatrixTest/MatrixTest
   - ./StackTest/StackTest
+  - ./StackTest/StackTest
 notifications:
   email: false
