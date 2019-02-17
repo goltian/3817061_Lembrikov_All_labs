@@ -14,5 +14,6 @@ script:
   - ./QueueTest/QueueTest
   - ./ListTest/ListTest
   - ./ArrListTest/ArrListTest 
+  - ./MultiStackTest/MultiStackTest 
 notifications:
   email: false
