@@ -8,5 +8,6 @@ before_script:
 script:
   - cmake ../3817061_Lembrikov_All_labs
   - make -j
+  - ./VectorTest/VectorTest
 notifications:
   email: false
