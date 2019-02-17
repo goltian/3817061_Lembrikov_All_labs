@@ -37,6 +37,10 @@ set(Polynom Polynom)
 set(PolynomLib PolynomLib)
 set(PolynomTest PolynomTest)
 
+set(StackList StackList)
+set(StackListLib StackListLib)
+set(StackListTest StackListTest)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
@@ -90,6 +94,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolynomLib)
 add_subdirectory(Polynom)
 add_subdirectory(PolynomLib)
 add_subdirectory(PolynomTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackListLib)
+add_subdirectory(StackList)
+add_subdirectory(StackListLib)
+add_subdirectory(StackListTest)
 
 #add_executable(${PROJECT_NAME} ${srcs} ${hdrs}) #Создаем проект с именем из переменной ${PROJECT_NAME}, в него добавляются файлы из переменных ${srcs} и ${hdrs}
 #add_subdirectory(Lift_lib) #Собираем проект в поддиректории lib1
