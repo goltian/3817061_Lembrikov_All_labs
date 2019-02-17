@@ -3,18 +3,11 @@
 #include <string>
 using namespace std;
 
-class MyException 
+class MyException
 {
 private:
-  string str;
+	string str;
 public:
-  MyException(std::string _str);
-  void Print();
+	MyException(string _str) : str(_str) {}
+	void Print() { cout << "\nWarning! \nMessage: " << str << endl; }
 };
-
-MyException::MyException(std::string _str) : str(_str) {}
-
-void MyException::Print()
-{
-  cout << "\nWarning! \nMessage: " << str << endl;
-}

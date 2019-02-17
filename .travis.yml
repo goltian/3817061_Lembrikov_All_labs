@@ -15,5 +15,6 @@ script:
   - ./ListTest/ListTest
   - ./ArrListTest/ArrListTest 
   - ./MultiStackTest/MultiStackTest 
+  - ./PolynomTest/PolynomTest 
 notifications:
   email: false
