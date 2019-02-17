@@ -1,40 +1,39 @@
-#include "../StackLib/Stack.h"
-#include <cstdlib> 
+#include "Stack.h"
+
 
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-	cout << "Пример использования стэка" << endl << "\nВведите размер стэка: ";
-	int n;
-	cin >> n;
-	try
-	{
-		TStack<int> stack(n);
-		for (int i = 0; i < n; i++)
-			stack.Put(i);
+  cout << "Test Stack" << endl << "\nEnter size stack: ";
+  int n;
+  cin >> n;
+  try
+  {
+    TStack<int> stack(n);
+    for (int i = 0; i < n; i++)
+      stack.Put(i);
 
-		cout << "\стэк: \n";
-		stack.PrintStack();
+    cout << "\nStack :\n";
+    stack.PrintStack();
 
-		TStack<int> copyStack(stack);
-		cout << "\n\nКопирование стэка :\n";
-		copyStack.PrintStack();
+    TStack<int> copyStack(stack);
+    cout << "\n\nCopyStack :\n";
+    copyStack.PrintStack();
 
-		if (copyStack == stack)
-			cout << "\n\nИсходный и скопированный стэки равны";
+    if (copyStack == stack)
+    cout << "\n\nCopyStack and Stack equivalence";
 
-		cout << "\n\nВынуть элемент из стэка: " << stack.Get();
+    cout << "\n\nGet element of the Stack: " << stack.Get();
 
-		cout << "\n\nПолучившийся стэк:\n";
-		stack.PrintStack();
+    cout << "\n\nStack now:\n";
+    stack.PrintStack();
 
-		if (copyStack != stack)
-			cout << "\n\nПолучившийся и исходный стэки разные\n";
-	}
+    if (copyStack != stack)
+      cout << "\n\nCopyStack and Stack different\n";
+  }
 
-	catch (MyException exp)
-	{
-		exp.Print();
-	}
-	return 0;
+  catch (MyException exp)
+  {
+    exp.Print();
+  }
+  return 0;
 }
