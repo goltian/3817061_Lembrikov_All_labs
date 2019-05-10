@@ -8,5 +8,15 @@ before_script:
 script:
   - cmake ../3817061_Lembrikov_All_labs
   - make -j
+  - ./VectorTest/VectorTest
+  - ./MatrixTest/MatrixTest
+  - ./StackTest/StackTest
+  - ./QueueTest/QueueTest
+  - ./ListTest/ListTest
+  - ./ArrListTest/ArrListTest 
+  - ./MultiStackTest/MultiStackTest 
+  - ./PolynomTest/PolynomTest 
+  - ./StackListTest/StackListTest 
+  - ./PolishTest/PolishTest 
 notifications:
   email: false
