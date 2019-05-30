@@ -45,6 +45,22 @@ set(Polish Polish)
 set(PolishLib PolishLib)
 set(PolishTest PolishTest)
 
+set(ScanTable ScanTable)
+set(ScanTableLib ScanTableLib)
+set(ScanTableTest ScanTableTest)
+
+set (SortTable SortTable)
+set (SortTableLib SortTableLib)
+set (SortTableTest SortTableTest)
+
+set (Plex Plex)
+set (PlexLib PlexLib)
+set (PlexTest PlexTest)
+
+set (Text Text)
+set (TextLib TextLib)
+set (TextTest TextTest)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
@@ -108,6 +124,26 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolishLib)
 add_subdirectory(Polish)
 add_subdirectory(PolishLib)
 add_subdirectory(PolishTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ScanTableLib)
+add_subdirectory(ScanTable)
+add_subdirectory(ScanTableLib)
+add_subdirectory(ScanTableTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/SortTableLib)
+add_subdirectory (SortTable)
+add_subdirectory (SortTableLib)
+add_subdirectory (SortTableTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PlexLib)
+add_subdirectory (Plex)
+add_subdirectory (PlexLib)
+add_subdirectory (PlexTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/TextLib)
+add_subdirectory (Text)
+add_subdirectory (TextLib)
+add_subdirectory (TextTest)
 
 #add_executable(${PROJECT_NAME} ${srcs} ${hdrs}) #Создаем проект с именем из переменной ${PROJECT_NAME}, в него добавляются файлы из переменных ${srcs} и ${hdrs}
 #add_subdirectory(Lift_lib) #Собираем проект в поддиректории lib1
