@@ -5,7 +5,7 @@
 using namespace std;
 #define fortravis
 
-#ifndef fortravis
+#ifdef fortravis
 int main()
 {
 	try
@@ -60,14 +60,14 @@ int main()
 		}
 		return 0;
 	}
-	catch (TException E)
+	catch (MyException E)
 	{
 		E.Print();
 	}
 }
 #endif
 
-#ifdef fortravis
+#ifndef fortravis
 int main()
 {
 	cout << "Creating table" << endl;
