@@ -21,5 +21,6 @@ script:
   - ./ScanTableTest/ScanTableTest
   - ./SortTableTest/SortTableTest
   - ./PlexTest/PlexTest
+  - ./TextTest/TextTest
 notifications:
   email: false
