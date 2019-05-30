@@ -1,5 +1,4 @@
-#include "../ScanTableLib/ScanTable.h"
-#include "../ExceptionLib/ExceptionLib.h"
+#include "../SortTableLib/SortTable.h"
 #include "../PolishLib/Stroka.h"
 #include <iostream>
 using namespace std;
@@ -15,7 +14,7 @@ int main()
 		int data;
 		cout << "Enter size of table" << endl;
 		cin >> size;
-		TScanTable<int> ST(10);
+		TSortTable<int> ST(10);
 		while (1)
 		{
 			cout << "What you want to do?" << endl;
@@ -67,36 +66,43 @@ int main()
 }
 #endif
 
+
+
+
 #ifdef fortravis
 int main()
 {
-	cout << "Creating table" << endl;
-	TScanTable<int> ST(10);
-	cout << "Add key i, data 1" << endl;
-	TString key1("i");
-	ST.Put(key1, 1);
-	cout << "Add key like, data 2" << endl;
-	TString key2("like");
-	ST.Put(key2, 2);
-	cout << "Add key write, data 3" << endl;
-	TString key3("write");
-	ST.Put(key3, 3);
-	cout << "Add key code, data 4" << endl;
-	TString key4("code");
-	ST.Put(key4, 4);
-	cout << "Print table" << endl;
-	cout << ST << endl;
-	cout << "Delete i" << endl;
-	ST.Del(key1);
-	cout << "Delete write" << endl;
-	ST.Del(key3);
-	cout << endl << "Searcing ""code""" << endl;
-	cout << ST.Search(key4) << endl;
-	cout << "Searcing ""like""" << endl;
-	cout << ST.Search(key2) << endl;
-	cout << "Table size = " << ST.GetCount() << endl;
-	cout << "Print table" << endl;
-	cout << ST << endl;
+	cout << "The example of using" << endl;
+	cout << "For Travis" << endl;
+	TSortTable<int> A;
+	TString one("one");
+	TString two("two");
+	TString three("three");
+	TString four("four");
+	TString five("five");
+	TString six("six");
+	TString seven("seven");
+	TString eight("eight");
+	A.Put(one, 1);
+	A.Put(two, 2);
+	A.Put(three, 3);
+	cout << A;
+	cout << "Searching ""three""" << endl;
+	cout << A.Search(three) << endl;
+
+	cout << endl << "New Table" << endl;
+	cout << "keys: one, two, three, four, five, six, seven, eight" << endl;
+	cout << "data: 1, 2, 3, 4, 5, 6, 7, 8" << endl;
+	cout << "with Quick Sort" << endl;
+	TString key[] = { one, two, three, four, five, six, seven, eight };
+	int data[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+	TSortTable<int> B(key, data, 8, 3);
+	cout << B << endl << endl;
+
+
+	cout << "Delete four" << endl;
+	B.Del(four);
+	cout << B << endl;
 	return 0;
 }
 #endif

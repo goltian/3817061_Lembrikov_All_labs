@@ -19,5 +19,6 @@ script:
   - ./StackListTest/StackListTest 
   - ./PolishTest/PolishTest
   - ./ScanTableTest/ScanTableTest
+  - ./SortTableTest/SortTableTest
 notifications:
   email: false
