@@ -1,5 +1,5 @@
 #include <gtest.h>
-#include "../Plexlib/Plex.h"
+#include "../PlexLib/Plex.h"
 #include "../PlexLib/Circle.h"
 
 TEST(Point, can_create)
