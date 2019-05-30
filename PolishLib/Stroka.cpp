@@ -99,6 +99,45 @@ char& TString::operator[](int i)
   throw MyException("error. False index.");
 }// ---------------------------------------------------------------------------
 
+bool TString::operator==(TString& _str)
+{
+	if (length != _str.length)
+		return false;
+	for (int i = 0; i < length; i++)
+		if (s[i] != _str.s[i])
+			return false;
+	return true;
+}// ---------------------------------------------------------------------------
+
+bool TString::operator>(TString& _str)
+{
+	int minlen;
+	if (length < _str.length)
+		minlen = length;
+	else
+		minlen = _str.length;
+	for (int i = 0; i < minlen - 1; i++)
+	{
+		if (s[i] < _str.s[i])
+			return false;
+		if (s[i] > _str.s[i])
+			return true;
+	}
+	if (length == _str.length)
+		return false;
+	if (minlen == length)
+		return true;
+	else
+		return false;
+}// ---------------------------------------------------------------------------
+
+bool TString::operator<(TString& _str)
+{
+	if (*this == _str)
+		return false;
+	return !(*this > _str);
+}// ---------------------------------------------------------------------------
+
 std::istream& operator>>(std::istream &A, TString &B)
 {
 	char s[256] = {0};
