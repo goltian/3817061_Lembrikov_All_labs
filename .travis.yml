@@ -20,5 +20,6 @@ script:
   - ./PolishTest/PolishTest
   - ./ScanTableTest/ScanTableTest
   - ./SortTableTest/SortTableTest
+  - ./PlexTest/PlexTest 
 notifications:
   email: false
