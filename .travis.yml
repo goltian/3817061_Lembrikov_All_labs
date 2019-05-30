@@ -17,6 +17,7 @@ script:
   - ./MultiStackTest/MultiStackTest 
   - ./PolynomTest/PolynomTest 
   - ./StackListTest/StackListTest 
-  - ./PolishTest/PolishTest 
+  - ./PolishTest/PolishTest
+  - ./ScanTableTest/ScanTableTest
 notifications:
   email: false
